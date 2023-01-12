@@ -129,8 +129,8 @@ if __name__ == '__main__':
                         help='path to image directory (e.g. images/adirondack)')
     parser.add_argument('alpha', type=float, nargs='?', default=0.5, 
                         help='default: 0.5 (halfway between the images)')
-    parser.add_argument('-s', '--save', action='store_true',
-                        help='flag to save image/video')
+    parser.add_argument('-s', '--save', metavar='filename', nargs='?', type=str, const='result.png',
+                        help='flag to save image/video. default filename is result.png')
     parser.add_argument('-p', '--pan', metavar='bound', type=float, nargs=2, 
                         help='pan camera from left bound to right bound')
     args = parser.parse_args()
@@ -147,7 +147,7 @@ if __name__ == '__main__':
     if not args.pan:
         res = synthesize(alpha, imgL, dispL, imgR, dispR)
         if args.save:
-            cv2.imwrite('result.png', res)
+            cv2.imwrite(args.save, res)
         cv2.namedWindow(f'alpha = {alpha}', cv2.WINDOW_NORMAL)
         cv2.imshow(f'alpha = {alpha}', res)
         cv2.waitKey(0)
@@ -171,7 +171,8 @@ if __name__ == '__main__':
         frames.append(frames[i])
 
     anim = ani.ArtistAnimation(fig, frames, interval=1, blit=True)
+
     if args.save:
-        anim.save('anim.png', writer=ani.PillowWriter(fps=10), dpi=150)
+        anim.save(args.save, writer=ani.PillowWriter(fps=10), dpi=150)
 
     plt.show()
