@@ -41,8 +41,8 @@ these artifacts would be to use optical flow instead of the given disparity map,
 but this causes significant overhead for the algorithm. Additionally, this algorithm
 struggles with `alpha < 0` and `alpha > 1` since these tend to have signifcant
 holes caused by occlusion that exist in both warped images.  
-![adirondack](example1.png)
-![motorcycle](example2.png)
+![adirondack](examples/example1.png)
+![motorcycle](examples/example2.png)
 
 ## Environment
 I'm using a `python3.8` virtual environment. To run different versions of

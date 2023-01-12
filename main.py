@@ -9,7 +9,8 @@ import matplotlib.animation as ani
 import matplotlib.pyplot as plt
 
 def read_pfm(file):
-    # Adopted from https://stackoverflow.com/questions/48809433/read-pfm-format-in-python
+    # Adopted from https://stackoverflow.com/questions/48809433/read-pfm-format-
+    # in-python
     with open(file, "rb") as f:
         # Line 1: PF=>RGB (3 channels), Pf=>Greyscale (1 channel)
         type = f.readline().decode('latin-1')
@@ -129,8 +130,9 @@ if __name__ == '__main__':
                         help='path to image directory (e.g. images/adirondack)')
     parser.add_argument('alpha', type=float, nargs='?', default=0.5, 
                         help='default: 0.5 (halfway between the images)')
-    parser.add_argument('-s', '--save', metavar='filename', nargs='?', type=str, const='result.png',
-                        help='flag to save image/video. default filename is result.png')
+    parser.add_argument('-s', '--save', metavar='filename', nargs='?', type=str,
+                        const='result.png',
+                        help='flag to save results. default file is result.png')
     parser.add_argument('-p', '--pan', metavar='bound', type=float, nargs=2, 
                         help='pan camera from left bound to right bound')
     args = parser.parse_args()
