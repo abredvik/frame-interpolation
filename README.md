@@ -1,4 +1,4 @@
-# frame-interpolation
+# Depth-Based Image Reprojection (frame interpolation)
 ## Description
 This project attempts to solve the following task:  
 *Given two images taken from two different views of a scene and their accompanying 
