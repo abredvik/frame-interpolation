@@ -1,8 +1,8 @@
 # frame-interpolation
 ## Description
 This project attempts to solve the following task:  
-Given two images taken from two different views and their accompanying depth
-maps, generate a novel view of the scene.  
+*Given two images taken from two different views of a scene and their accompanying 
+depth maps, generate a novel view of the scene.*
   
 For the purposes of this project, the images are assumed to be taken by a stereo
 setup and rectified. The depth maps are assumed to be pixel disparity derived
@@ -34,13 +34,14 @@ in minor artifacts spread throughout the image. Many of these artifacts are just
 a single pixel out of place. To resolve these artifacts, I use median blurring.
 
 ## Results
-The results of this algorithm can be found below. It seems to perform well in
-general, but still suffers from some minor artifacts. From experimentation, these 
-artifacts seem to be caused by the lack of vertical disparities. One way to resolve
-these artifacts would be to use optical flow instead of the given disparity map,
-but this causes significant overhead for the algorithm. Additionally, this algorithm
-struggles with `alpha < 0` and `alpha > 1` since these tend to have signifcant
-holes caused by occlusion that exist in both warped images.  
+The results of this algorithm can be found below; the two examples pan from `alpha=0` 
+to `alpha=1`. It seems to perform well in general, but still suffers from some minor 
+artifacts. From experimentation, these artifacts seem to be caused by the lack of 
+vertical disparities. One way to resolve these artifacts would be to use optical flow 
+instead of the given disparity map, but this causes significant overhead for the 
+algorithm. Additionally, this algorithm struggles with `alpha < 0` and `alpha > 1` 
+since these tend to have signifcant holes caused by occlusion that exist in both 
+warped images.  
 ![adirondack](examples/example1.png)
 ![motorcycle](examples/example2.png)
 
