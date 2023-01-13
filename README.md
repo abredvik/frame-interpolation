@@ -11,7 +11,13 @@ from the stereo setup.
 Let's say the images were taken by two cameras: `camera0` and `camera1`. Let's define
 a number `alpha` representing a point along the line connecting the two cameras,
 such that `camera0` sits at `alpha=0` and `camera1` sits at `alpha=1`. A view 
-halfway between these views would sit at `alpha=0.5`.
+halfway between these views would sit at `alpha=0.5`. The basis for this algorithm
+is to use the disparity maps as a forward mapping from one image to the other, so by
+multiplying the left disparity map by `alpha`, we obtain a mapping from the left 
+image to image `alpha`. Similarly, we obtain an estimate of the same image by 
+multiplying the right disparity by `(1 - alpha)`. Using these two estimates of the 
+same image, we can merge them into a coherent result by resolving holes caused 
+by occluded regions and removing artifacts.
 
 ## Algorithm
 1. First, the images and disparity maps are processed to ensure they all have the 
@@ -34,14 +40,16 @@ in minor artifacts spread throughout the image. Many of these artifacts are just
 a single pixel out of place. To resolve these artifacts, I use median blurring.
 
 ## Results
-The results of this algorithm can be found below; the two examples pan from `alpha=0` 
+Some results of this algorithm can be found below; the two examples pan from `alpha=0` 
 to `alpha=1`. It seems to perform well in general, but still suffers from some minor 
-artifacts. From experimentation, these artifacts seem to be caused by the lack of 
-vertical disparities. One way to resolve these artifacts would be to use optical flow 
-instead of the given disparity map, but this causes significant overhead for the 
-algorithm. Additionally, this algorithm struggles with `alpha < 0` and `alpha > 1` 
-since these tend to have signifcant holes caused by occlusion that exist in both 
-warped images.  
+artifacts. From experimentation, these artifacts seem to be caused by slight vertical 
+misalignment between the images (since the disparity maps represent purely horizontal 
+disparity). One way to resolve these artifacts would be to use optical flow instead of 
+the given disparity map in order to provide a bidrectional forward mapping, but this 
+causes significant overhead for the algorithm (especially for high-resolution images). 
+Additionally, this algorithm struggles with generating images where `alpha < 0` or 
+`alpha > 1` since these tend to have significant holes caused by regions occluded in 
+both warped images.  
 ![adirondack](examples/example1.png)
 ![motorcycle](examples/example2.png)
 
