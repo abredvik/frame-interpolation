@@ -12,5 +12,5 @@ mkdir images
 cd images
 
 download "adirondack"
+download "flowers"
 download "jadeplant"
-download "motorcycle"

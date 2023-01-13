@@ -50,8 +50,9 @@ causes significant overhead for the algorithm (especially for high-resolution im
 Additionally, this algorithm struggles with generating images where `alpha < 0` or 
 `alpha > 1` since these tend to have significant holes caused by regions occluded in 
 both warped images.  
-![adirondack](examples/example1.png)
-![motorcycle](examples/example2.png)
+![adirondack](examples/adirondack.png)
+![flowers](examples/flowers.png)
+![jadeplant](examples/jadeplant.png)
 
 ## Environment
 I'm using a `python3.8` virtual environment. To run different versions of
@@ -69,7 +70,7 @@ To download some example images and disparity maps from the [Middlebury](https:/
 dataset, run  
 `$ ./download.sh`  
 This will create a directory `images/` with three subdirectories `adirondack/`,
-`jadeplant/`, and `motorcycle/`.  
+`flowers/`, and `jadeplant/`.  
   
 Running the code will look something like:  
 `(env) $ python main.py images/adirondack/ 0.5`  
