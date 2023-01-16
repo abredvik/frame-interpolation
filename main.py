@@ -104,12 +104,10 @@ def synthesize(alpha, imgLeft, dispLeft, imgRight, dispRight):
     res[mask] = resL[mask]
     res[~mask] = resR[~mask]
 
-    # Downsample image
+    # Downsample image until less than 1000x1000, preserving aspect ratio
     resized = res.copy()
     for _ in range(w // 1000):
-        height, width, _ = resized.shape
-        resized = np.delete(resized, list(range(0, height, 2)), axis=0)
-        resized = np.delete(resized, list(range(0, width, 2)), axis=1)
+        resized = resized[::2, ::2]
 
     # Fill holes using Navier-Stokes inpainting
     mask = np.uint8(~np.any(resized, axis=2))
